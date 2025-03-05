@@ -22,19 +22,19 @@ async def get_devman_reviews(devman_token: str):
             try:
                 async with session.get(url=url, headers=headers, params=params) as response:
                     response.raise_for_status()
-                    json_response = await response.json()
-                    logger.debug(json_response)
+                    server_answer = await response.json()
+                    logger.debug(server_answer)
 
-                    match json_response['status']:
+                    match server_answer['status']:
                         case 'found':
-                            timestamp = json_response['last_attempt_timestamp']
-                            new_attempts = json_response['new_attempts']
+                            timestamp = server_answer['last_attempt_timestamp']
+                            new_attempts = server_answer['new_attempts']
                             yield _parse_reviews(new_attempts)
 
                         case 'timeout':
-                            timestamp = json_response['timestamp_to_request']
+                            timestamp = server_answer['timestamp_to_request']
                         case _:
-                            logger.error(f'Unexpected status: {json_response["status"]}')
+                            logger.error(f'Unexpected status: {server_answer["status"]}')
                             await sleep(retry_delay)
 
             except aiohttp.ClientResponseError as e:
