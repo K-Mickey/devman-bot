@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     bot_token: str
     devman_token: str
 
+    admin_id: str
     log_level: str = 'INFO'
     log_format: str = '[%(asctime)s] [%(levelname)s] [%(name)s - %(filename)s] > %(lineno)d - %(message)s'
 

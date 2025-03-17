@@ -32,6 +32,7 @@ pip install -r requirements.txt
 Создайте файл .env в директории проекта и заполните его обязательными данными:
 - **DEVMAN_TOKEN** - токен пользователя Devman. Получить в [профиле Devman](https://dvmn.org/api/docs/)
 - **BOT_TOKEN** - токен бота Telegram. Создать через [@BotFather](https://t.me/BotFather)
+- **ADMIN_ID** - айди администратора в Telegram. Узнать в [боте](https://t.me/userinfobot)
 
 Опциональные настройки:
 - **LOG_LEVEL** - уровень логирования. По умолчанию INFO
