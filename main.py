@@ -35,17 +35,23 @@ class DevmanBot:
         logging.basicConfig(level=self.log_level, format=self.log_format)
 
         telegram_handler = TelegramLogsHandler(bot=bot, chat_id=self.admin_id)
-        telegram_handler.setFormatter(logging.Formatter(self.log_format))
-        telegram_handler.setLevel(self.log_level)
+        telegram_handler.setFormatter(logging.Formatter('%(message)s'))
+        telegram_handler.setLevel(logging.WARNING)
         logging.getLogger().addHandler(telegram_handler)
 
 
 if __name__ == '__main__':
-    asyncio.run(
-        DevmanBot(
-            bot_token=settings.bot_token,
-            admin_id=settings.admin_id,
-            log_format=settings.log_format,
-            log_level=settings.log_level,
-        ).run()
-    )
+    while True:
+        try:
+            asyncio.run(
+                DevmanBot(
+                    bot_token=settings.bot_token,
+                    admin_id=settings.admin_id,
+                    log_format=settings.log_format,
+                    log_level=settings.log_level,
+                ).run()
+            )
+        except Exception as e:
+            logging.critical('Бот упал с ошибкой')
+            logging.critical(e, exc_info=True)
+            asyncio.run(asyncio.sleep(settings.restart_delay))

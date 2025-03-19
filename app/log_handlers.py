@@ -12,4 +12,8 @@ class TelegramLogsHandler(logging.Handler):
 
     def emit(self, record):
         message = self.format(record)
-        asyncio.create_task(self.bot.send_message(self.chat_id, message))
+        if len(message) > 1000:
+            message = message[:1000] + '...'
+
+        loop = asyncio.get_running_loop()
+        loop.create_task(self.bot.send_message(self.chat_id, message))

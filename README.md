@@ -35,6 +35,7 @@ pip install -r requirements.txt
 - **ADMIN_ID** - айди администратора в Telegram. Узнать в [боте](https://t.me/userinfobot)
 
 Опциональные настройки:
+- **RESTART_DELAY** - задержка перезагрузки бота в секундах. По умолчанию 60
 - **LOG_LEVEL** - уровень логирования. По умолчанию INFO
 - **LOG_FORMAT** - формат логирования
 

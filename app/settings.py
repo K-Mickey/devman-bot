@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     bot_token: str
+    restart_delay: int = 60
     devman_token: str
 
     admin_id: str
